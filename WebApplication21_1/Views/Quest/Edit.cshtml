@@ -1,0 +1,42 @@
+﻿@model WebApplication21_1.Models.Quest
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Quest</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="PlayersCount" class="control-label"></label>
+                <input asp-for="PlayersCount" class="form-control" />
+                <span asp-validation-for="PlayersCount" class="text-danger"></span>
+            </div>
+                      <div class="form-group">  
+                <label asp-for = "Difficulty">Difficulty</label>
+               @Html.DropDownListFor(model => model.Difficulty, Enum.GetValues(typeof(Difficulty)).Cast<Difficulty>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }), new { @class = "form-control", id = "Difficulty" })
+             </div>
+            <div class="form-group">  
+                <label asp-for = "LevelFear">LevelFear</label>
+                @Html.DropDownListFor(model => model.LevelFear, Enum.GetValues(typeof(LevelFear)).Cast<LevelFear>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }), new { @class = "form-control", id = "LevelFear" })
+             </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

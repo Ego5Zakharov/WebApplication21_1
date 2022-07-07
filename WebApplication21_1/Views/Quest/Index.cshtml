@@ -1,0 +1,40 @@
+﻿<h1>Index</h1>
+
+@model IEnumerable<WebApplication21_1.Models.Quest>
+<h1>Список пользователей</h1>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@ViewBag.CountSort">
+                CountSort
+            </a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@ViewBag.DifficultySort">
+                DifficultySort
+            </a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@ViewBag.FearSort">
+                FearSort
+            </a>
+        </th>
+    </tr>
+    @foreach (Quest quest in Model)
+    {
+        <tr>
+            <td>@quest.PlayersCount<td>
+            <td>@quest.Difficulty</td>
+            <td>@quest.LevelFear</td>
+
+             <td>
+                <a asp-action="Edit" asp-route-id="@quest.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@quest.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@quest.Id">Delete</a>
+            </td>
+        </tr>
+    }
+</table>
