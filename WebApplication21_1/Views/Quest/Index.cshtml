@@ -1,6 +1,9 @@
-﻿<h1>Index</h1>
+﻿
+@if(User.Identity.IsAuthenticated)
+{
+<h1>Index</h1>
 
-@model IEnumerable<WebApplication21_1.Models.Quest>
+    @model IEnumerable<WebApplication21_1.Models.Quest>
 <h1>Список пользователей</h1>
 <p>
     <a asp-action="Create">Create New</a>
@@ -38,3 +41,8 @@
         </tr>
     }
 </table>
+}
+else{
+ <div>Для Просмотра контента авторизуйтесь!</div>
+ 
+}

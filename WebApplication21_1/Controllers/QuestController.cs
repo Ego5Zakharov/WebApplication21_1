@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IdentityModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
@@ -21,6 +23,7 @@ namespace WebApplication21_1.Controllers
         }
 
         // GET: Quest
+        [Authorize]
         public async Task<IActionResult> Index(SortState sortOrder = SortState.PlayersCountAsc)
         {
             var quests = _context.Quests.Where(x => x.Id > 0);
@@ -42,13 +45,14 @@ namespace WebApplication21_1.Controllers
 
             return View(await quests.AsNoTracking().ToListAsync());
         }
-
+        [Authorize]
         public async Task<IActionResult> Search(Difficulty difficulty)
         {
             var quests = _context.Quests.Where(x => x.Difficulty == difficulty);
 
             return View(quests);
         }
+        [Authorize]
 
         // GET: Quest/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -67,13 +71,13 @@ namespace WebApplication21_1.Controllers
 
             return View(quest);
         }
-
+        [Authorize]
         // GET: Quest/Create
         public IActionResult Create()
         {
             return View();
         }
-
+        [Authorize]
         // POST: Quest/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -89,7 +93,7 @@ namespace WebApplication21_1.Controllers
             }
             return View(quest);
         }
-
+        [Authorize]
         // GET: Quest/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -105,7 +109,7 @@ namespace WebApplication21_1.Controllers
             }
             return View(quest);
         }
-
+        [Authorize]
         // POST: Quest/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -140,7 +144,7 @@ namespace WebApplication21_1.Controllers
             }
             return View(quest);
         }
-
+          [Authorize]
         // GET: Quest/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -158,7 +162,7 @@ namespace WebApplication21_1.Controllers
 
             return View(quest);
         }
-
+        [Authorize]
         // POST: Quest/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
