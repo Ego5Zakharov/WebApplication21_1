@@ -55,8 +55,6 @@ namespace WebApplication21_1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (ModelState.IsValid)
-            {
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
@@ -74,7 +72,6 @@ namespace WebApplication21_1.Controllers
                 {
                     ModelState.AddModelError("", "Неправильный логин и (или) пароль");
                 }
-            }
             return View(model);
         }
 

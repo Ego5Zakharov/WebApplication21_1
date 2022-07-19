@@ -23,7 +23,7 @@ namespace WebApplication21_1.Controllers
         }
 
         // GET: Quest
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Index(SortState sortOrder = SortState.PlayersCountAsc)
         {
             var quests = _context.Quests.Where(x => x.Id > 0);
